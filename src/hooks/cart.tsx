@@ -7,7 +7,6 @@ import React, {
 } from 'react';
 
 import AsyncStorage from '@react-native-community/async-storage';
-import { ProductQuantity } from 'src/pages/Cart/styles';
 
 interface Product {
   id: string;
@@ -31,7 +30,9 @@ const CartProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     async function loadProducts(): Promise<void> {
-      const productsStoraged = await AsyncStorage.getItem('@gobarber:products');
+      const productsStoraged = await AsyncStorage.getItem(
+        '@gomarkeplace:products',
+      );
 
       if (productsStoraged) setProducts(JSON.parse(productsStoraged));
     }
@@ -51,7 +52,7 @@ const CartProvider: React.FC = ({ children }) => {
         setProducts(productsArray);
 
         await AsyncStorage.setItem(
-          '@gobarber:produtcs',
+          '@gomarkeplace:products',
           JSON.stringify(productsArray),
         );
 
@@ -66,7 +67,7 @@ const CartProvider: React.FC = ({ children }) => {
       setProducts(productsArray);
 
       await AsyncStorage.setItem(
-        '@gobarber:produtcs',
+        '@gomarkeplace:products',
         JSON.stringify(productsArray),
       );
     },
